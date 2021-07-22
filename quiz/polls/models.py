@@ -38,6 +38,7 @@ class Question(models.Model):
     )
     question_text = models.CharField(max_length=255, verbose_name=_("Title"))
     question_type = models.CharField(max_length=8, choices=TYPES, default='radio')
+    is_active = models.BooleanField(default=True)
 
     class Meta:
         verbose_name = "Question"
