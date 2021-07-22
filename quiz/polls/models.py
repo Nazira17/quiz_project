@@ -23,9 +23,8 @@ class Quiz(models.Model):
       auto_now_add=True, verbose_name=_("Date Start"))
     date_end = models.DateTimeField(
       auto_now_add=True, verbose_name=_("Date End"))
-
     category = models.ForeignKey(
-      Category)
+      Category, on_delete=models.DO_NOTHING)
 
 
 class Question(models.Model):
@@ -37,15 +36,15 @@ class Question(models.Model):
     quiz = models.ForeignKey(
       Quiz, related_name='question', on_delete=models.DO_NOTHING
     )
-    title = models.CharField(max_length=255, verbose_name=_("Title"))
-    type = models.CharField(max_length=8, choices=TYPES, default='radio')
+    question_text = models.CharField(max_length=255, verbose_name=_("Title"))
+    question_type = models.CharField(max_length=8, choices=TYPES, default='radio')
 
     class Meta:
         verbose_name = "Question"
         verbose_name_plural = "Questions"
 
     def __unicode__(self):
-        return self.title
+        return self.question_text
 
 
 class Answer(models.Model):
